@@ -14,7 +14,7 @@ const Post = ({
     <div className="post">
       <div className="post__header">
         <Avatar className="post__avatar" alt="as" src="" />
-        <h3>post</h3>
+        <h3>{userName}</h3>
       </div>
 
       <img src={imageUrl} alt={userName} className="post__image" />
