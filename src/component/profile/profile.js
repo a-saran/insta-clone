@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import firebase from "firebase";
 import "./styles.scss";
 import { Button } from "@material-ui/core";
 import { storage, db } from "../../firebase";
+// import MyProfile from "../my-profile/MyProfile";
 
-const Profile = ({ userName }) => {
+const Profile = ({ user }) => {
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState("");
   const [caption, setCaption] = useState("");
@@ -16,6 +17,10 @@ const Profile = ({ userName }) => {
   };
 
   const handleUpload = () => {
+    if (!image) {
+      return;
+    }
+
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
     uploadTask.on(
@@ -40,7 +45,7 @@ const Profile = ({ userName }) => {
               timestamp: firebase.firestore.FieldValue.serverTimestamp(),
               caption: caption,
               imageUrl: url,
-              username: userName
+              username: user.userName
             });
 
             setCaption("");
@@ -53,22 +58,33 @@ const Profile = ({ userName }) => {
 
   return (
     <div className="profile__container">
-      <h1>New Post</h1>
+      {/* <MyProfile /> */}
+      <div className="new_post">
+        {user ? <h1>New Post</h1> : <h3>Please, sign in to add post</h3>}
 
-      <progress value={progress} max="100" className="profile__progress" />
+        {user && (
+          <Fragment>
+            <progress
+              value={progress}
+              max="100"
+              className="profile__progress"
+            />
 
-      <input
-        type="text"
-        placeholder="Enter a caption..."
-        onChange={({ target: { value } }) => {
-          setCaption(value);
-        }}
-        value={caption}
-      />
-      <input type="file" onChange={handleChange} />
-      <Button color="primary" onClick={handleUpload}>
-        Upload
-      </Button>
+            <textarea
+              type="text"
+              placeholder="Enter a caption..."
+              onChange={({ target: { value } }) => {
+                setCaption(value);
+              }}
+              value={caption}
+            />
+            <input type="file" onChange={handleChange} />
+            <Button color="primary" onClick={handleUpload}>
+              Upload
+            </Button>
+          </Fragment>
+        )}
+      </div>
     </div>
   );
 };

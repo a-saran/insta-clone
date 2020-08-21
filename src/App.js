@@ -30,7 +30,7 @@ function App() {
       <Header user={user} />
       <div className="container app__body">
         <Posts user={user} />
-        {user && <Profile userName={user.displayName} />}
+        <Profile user={user} />
       </div>
     </div>
   );
