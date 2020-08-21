@@ -60,7 +60,11 @@ const Profile = ({ user }) => {
     <div className="profile__container">
       {/* <MyProfile /> */}
       <div className="new_post">
-        {user ? <h1>New Post</h1> : <h3>Please, sign in to add post</h3>}
+        {user ? (
+          <h1>New Post</h1>
+        ) : (
+          <h3>Please, Sign in to add Post and Comment</h3>
+        )}
 
         {user && (
           <Fragment>

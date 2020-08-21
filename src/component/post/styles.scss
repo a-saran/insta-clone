@@ -29,4 +29,30 @@
     font-weight: normal;
     padding: 20px;
   }
+
+  &__comments {
+    padding: 20px;
+
+    b {
+      margin-right: 10px;
+    }
+  }
+
+  &__commentBox {
+    display: flex;
+    margin-top: 10px;
+
+    .post__input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      border-top: 1px solid lightgray;
+    }
+
+    .post__button {
+      border: none;
+      border-top: 1px solid lightgray;
+      color: #6082a3;
+    }
+  }
 }

@@ -3,7 +3,7 @@ import Post from "../post/Post";
 import { db } from "../../firebase";
 import "./styles.scss";
 
-const Posts = () => {
+const Posts = ({ user }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,9 @@ const Posts = () => {
   return (
     <div className="posts_container">
       {posts ? (
-        posts.map(({ post, id }) => <Post post={post} key={id} />)
+        posts.map(({ post, id }) => (
+          <Post post={post} postId={id} key={id} user={user} />
+        ))
       ) : (
         <h1>No posts Available</h1>
       )}
