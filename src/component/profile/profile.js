@@ -63,7 +63,7 @@ const Profile = ({ user }) => {
         {user ? (
           <h1>New Post</h1>
         ) : (
-          <h3>Please, Sign in to add Post and Comment</h3>
+          <h3>Sorry, Sign in to add Post and Comment</h3>
         )}
 
         {user && (
