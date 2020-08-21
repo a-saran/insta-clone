@@ -31,7 +31,7 @@ function App() {
           className="app__headerImage"
         />
       </div>
-      <Posts />
+      <Posts user={user} />
     </div>
   );
 }

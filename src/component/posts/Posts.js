@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Post from "../post/Post";
 import { db } from "../../firebase";
-import SignUp from "../sign-up/SignUp";
+import Authentication from "../sign-up/SignUp";
 
-const Posts = () => {
+const Posts = ({ user }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Posts = () => {
 
   return (
     <div>
-      <SignUp />
+      <Authentication user={user} />
       {posts.map(({ post, id }) => (
         <Post post={post} key={id} />
       ))}
