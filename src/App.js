@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from "react";
-import Post from "./component/post/Post";
-import { db } from "./firebase";
+import Posts from "./component/posts/Posts";
+import { auth } from "./firebase";
+
 import "./App.css";
 
 function App() {
-  const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    db.collection("posts").onSnapshot(snapshot => {
-      console.log(snapshot);
-      setPosts(snapshot.docs.map(doc => ({ post: doc.data, id: doc.id })));
+    const unSubcribe = auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        console.log(authUser);
+        setUser(authUser);
+      } else {
+        setUser(null);
+      }
     });
+
+    return () => {
+      unSubcribe();
+    };
   }, []);
 
   return (
@@ -22,9 +31,7 @@ function App() {
           className="app__headerImage"
         />
       </div>
-      {posts.map(({ post, id }) => (
-        <Post post={post} key={id} />
-      ))}
+      <Posts />
     </div>
   );
 }
