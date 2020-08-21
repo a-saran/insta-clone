@@ -1,0 +1,28 @@
+.profile {
+  &__container {
+    border: 1px solid #ddd;
+    height: max-content;
+    margin-left: 20px;
+    border-radius: 6px;
+    padding: 10px;
+    position: sticky;
+    top: 60px;
+    margin-top: 10px;
+    width: 300px;
+  }
+
+  &__progress {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 500px) {
+    &__container {
+      position: fixed;
+      bottom: 0;
+      top: unset;
+      background: #fff;
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}

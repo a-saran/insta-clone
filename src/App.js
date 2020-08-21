@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Posts from "./component/posts/Posts";
 import { auth } from "./firebase";
+import Profile from "./component/profile/profile";
+import Authentication from "./component/sign-up/SignUp";
+import Header from "./component/header/Header";
 
-import "./App.css";
+import "./App.scss";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -23,15 +26,12 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <div className="app__header">
-        <img
-          src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
-          alt="logo"
-          className="app__headerImage"
-        />
+    <div className="app">
+      <Header user={user} />
+      <div className="container app__body">
+        <Posts user={user} />
+        {user && <Profile userName={user.displayName} />}
       </div>
-      <Posts user={user} />
     </div>
   );
 }

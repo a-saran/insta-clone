@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  background-color: #fafafa;
+}
+
+.app {
+
+  &__header {
+    background-color: white;
+    padding: 20px;
+    object-fit: contain;
+    border-bottom: 1px solid lightgrey;
+  }
+
+  &__body {
+    position: relative;
+    display: flex;
+    margin-top: 10px !important;
+  }
+}
+
+.container {
+  max-width: 1024px;
+  margin: auto;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}

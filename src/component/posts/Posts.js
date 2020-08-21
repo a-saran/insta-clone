@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Post from "../post/Post";
 import { db } from "../../firebase";
-import Authentication from "../sign-up/SignUp";
+import "./styles.scss";
 
-const Posts = ({ user }) => {
+const Posts = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    db.collection("posts").onSnapshot(snapshot => {
-      setPosts(snapshot.docs.map(doc => ({ post: doc.data, id: doc.id })));
-    });
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot(snapshot => {
+        setPosts(snapshot.docs.map(doc => ({ post: doc.data(), id: doc.id })));
+      });
   }, []);
 
   return (
-    <div>
-      <Authentication user={user} />
-      {posts.map(({ post, id }) => (
-        <Post post={post} key={id} />
-      ))}
+    <div className="posts_container">
+      {posts ? (
+        posts.map(({ post, id }) => <Post post={post} key={id} />)
+      ) : (
+        <h1>No posts Available</h1>
+      )}
     </div>
   );
 };
